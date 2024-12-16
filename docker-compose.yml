@@ -1,0 +1,43 @@
+services:
+  flask_app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Explicitly specify the Dockerfile
+    ports:
+      - "5005:5005"  # Map Flask app port to host
+    env_file:
+      - .env  # Load environment variables from .env file
+    depends_on:
+      - db  # Ensure db starts before flask_app
+    volumes:
+      - ./app:/app  # Bind mount for live code updates (optional for development)
+    networks:
+      - app_network  # Use a dedicated network
+    deploy:
+      resources:
+        limits:
+          memory: 512M  # Limit memory usage to 512MB
+          cpus: "0.5"   # Limit CPU usage to 0.5 cores
+
+  db:
+    image: postgres:16
+    env_file:
+      - .env  # Load environment variables from .env file
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Persistent database storage
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port to host (useful for debugging)
+    networks:
+      - app_network  # Use the same dedicated network
+    healthcheck:  # Add a health check to ensure db is ready before flask_app starts
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:  # Volume for PostgreSQL data persistence
+
+networks:
+  app_network:
+    driver: bridge  # Use bridge network for inter-service communication
