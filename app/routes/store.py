@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app import db
 from app.models import StoreModel
 from app.schemas.store_schema import StoreSchema
+from flask_jwt_extended import jwt_required
 
 store_bp = Blueprint('store', __name__, url_prefix='/stores')
 store_schema = StoreSchema()
@@ -23,6 +24,7 @@ def get_store(store_id):
 
 
 @store_bp.route('', methods=['POST'])
+@jwt_required()
 def create_store():
     """Create a new store."""
     data = request.get_json()
@@ -34,6 +36,7 @@ def create_store():
 
 
 @store_bp.route('/<int:store_id>', methods=['PUT'])
+@jwt_required()
 def update_store(store_id):
     """Update an existing store."""
     store = StoreModel.query.get_or_404(store_id)
@@ -47,6 +50,7 @@ def update_store(store_id):
 
 
 @store_bp.route('/<int:store_id>', methods=['DELETE'])
+@jwt_required()
 def delete_store(store_id):
     """Delete a store by ID."""
     try:
