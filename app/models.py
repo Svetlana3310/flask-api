@@ -10,7 +10,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.now())
 
     def __repr__(self):
-        return f'<User {self.name}>'
+        return f'<User {self.username}>'
 
 
 class ToDoItem(db.Model):
