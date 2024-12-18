@@ -10,7 +10,7 @@ services:
     depends_on:
       - db  # Ensure db starts before flask_app
     volumes:
-      - ./app:/app  # Bind mount for live code updates (optional for development)
+      - .:/app  # Bind mount for live code updates (optional for development)
     networks:
       - app_network  # Use a dedicated network
     deploy:

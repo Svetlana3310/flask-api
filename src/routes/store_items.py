@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
-from app import db
-from app.models import ItemModel, StoreModel
-from app.schemas.items_schema import ItemSchema
+from src import db
+from src.models import ItemModel, StoreModel
+from src.schemas.items_schema import ItemSchema
 from flask_jwt_extended import jwt_required
 
 item_bp = Blueprint('item', __name__, url_prefix='/items')

@@ -1,13 +1,11 @@
 from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field
-from app.models import ItemModel
+from src.models import StoreModel
 
 
-class ItemSchema(SQLAlchemySchema):
+class StoreSchema(SQLAlchemySchema):
     class Meta:
-        model = ItemModel
+        model = StoreModel
         load_instance = True  # Deserialize to SQLAlchemy objects
 
     id = auto_field()
     name = auto_field()
-    price = auto_field()
-    store_id = auto_field()

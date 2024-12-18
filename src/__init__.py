@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from app.config import Config
+from src.config import Config
 import logging
 
 db = SQLAlchemy()
@@ -54,14 +54,14 @@ def create_app():
 
     # Initialize extensions
     db.init_app(app)
-    migrate.init_app(app, db)
+    migrate.init_app(app, db, directory="src/migrations")
     jwt.init_app(app)
 
     # Import models
-    from app.models import User, ToDoItem, StoreModel, ItemModel
+    from src.models import User, ToDoItem, StoreModel, ItemModel
 
     # Register blueprints
-    from app.routes import auth, main, store, store_items
+    from src.routes import auth, main, store, store_items
     app.register_blueprint(auth.auth_bp)
     app.register_blueprint(main.main_bp)
     app.register_blueprint(store.store_bp)
