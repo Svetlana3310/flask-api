@@ -1,4 +1,5 @@
-from app import db
+from operator import index
+from src import db
 
 
 class User(db.Model):
@@ -10,7 +11,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=db.func.now())
 
     def __repr__(self):
-        return f'<User {self.name}>'
+        return f'<User {self.username}>'
 
 
 class ToDoItem(db.Model):
@@ -28,7 +29,7 @@ class StoreModel(db.Model):
     __tablename__ = "stores"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
+    name = db.Column(db.String(80), unique=True, nullable=False, index=True)
 
     # Relationship to ItemModel
     items = db.relationship(
@@ -46,7 +47,7 @@ class ItemModel(db.Model):
     __tablename__ = "items"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
+    name = db.Column(db.String(80), nullable=False, index=True)
     price = db.Column(db.Float, nullable=False)
 
     # Add ON DELETE CASCADE explicitly for clarity

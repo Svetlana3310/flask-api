@@ -7,3 +7,4 @@ Bcrypt
 python-dotenv
 flask-marshmallow 
 marshmallow-sqlalchemy
+Faker

@@ -1,0 +1,4 @@
+| Batch Size | SELECT Time | INSERT Time | UPDATE Time | DELETE Time |
+| 1000       | 0.006s     | 0.022s     | 0.117s     | 0.080s     |
+| 10000      | 0.157s     | 0.329s     | 1.062s     | 0.857s     |
+| 100000     | 1.604s     | 3.389s     | 10.357s     | 8.831s     |
