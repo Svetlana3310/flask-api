@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
-from app import db
-from app.models import ItemModel, StoreModel
-from app.schemas.items_schema import ItemSchema
+from src import db
+from src.models import ItemModel, StoreModel
+from src.schemas.items_schema import ItemSchema
+from flask_jwt_extended import jwt_required
 
 item_bp = Blueprint('item', __name__, url_prefix='/items')
 item_schema = ItemSchema()
@@ -23,6 +24,7 @@ def get_item(item_id):
 
 
 @item_bp.route('', methods=['POST'])
+@jwt_required()
 def create_item():
     """Create a new item."""
     data = request.get_json()
@@ -34,6 +36,7 @@ def create_item():
 
 
 @item_bp.route('/<int:item_id>', methods=['PUT'])
+@jwt_required()
 def update_item(item_id):
     """Update an existing item."""
     item = ItemModel.query.get_or_404(item_id)
@@ -49,6 +52,7 @@ def update_item(item_id):
 
 
 @item_bp.route('/<int:item_id>', methods=['DELETE'])
+@jwt_required()
 def delete_item(item_id):
     """Delete an item by ID."""
     item = ItemModel.query.get_or_404(item_id)
