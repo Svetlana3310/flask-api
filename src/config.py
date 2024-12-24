@@ -5,7 +5,7 @@ from datetime import timedelta
 class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    DEBUG = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
     SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret')
     SQLALCHEMY_ECHO = os.getenv('SQLALCHEMY_ECHO', 'true')
 

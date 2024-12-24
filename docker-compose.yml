@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile  # Explicitly specify the Dockerfile
     ports:
-      - "5005:5005"  # Map Flask app port to host
+      - "8000:8000"  # Map Flask app port to host
     env_file:
       - .env  # Load environment variables from .env file
     depends_on:
