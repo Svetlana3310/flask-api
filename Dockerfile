@@ -19,4 +19,5 @@ ENV FLASK_ENV=${FLASK_ENV}
 EXPOSE 5005
 
 # Command to run the app
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5005"]
+#CMD ["flask", "run", "--host=0.0.0.0", "--port=5005"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:app"]
