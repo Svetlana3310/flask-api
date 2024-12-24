@@ -3,10 +3,14 @@ from src import db
 from src.models import ItemModel, StoreModel
 from src.schemas.items_schema import ItemSchema
 from flask_jwt_extended import jwt_required
+from flask_cors import CORS
 
 item_bp = Blueprint('item', __name__, url_prefix='/items')
 item_schema = ItemSchema()
 items_schema = ItemSchema(many=True)
+
+# Enable CORS for the blueprint
+CORS(item_bp)
 
 
 @item_bp.route('', methods=['GET'])
