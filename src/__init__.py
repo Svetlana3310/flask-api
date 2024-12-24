@@ -52,8 +52,6 @@ def check_if_token_in_blacklist(jwt_header, jwt_payload):
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    # Enable CORS for all routes and origins
-    CORS(app)
 
     # Initialize extensions
     db.init_app(app)
@@ -72,5 +70,8 @@ def create_app():
 
     logging.basicConfig(level=logging.INFO)
     app.logger.info("Flask app starting up")
+
+    # Enable CORS for all routes and origins
+    CORS(app)
 
     return app
