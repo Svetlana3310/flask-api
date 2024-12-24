@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from src.config import Config
 import logging
+from flask_cors import CORS  # Import CORS
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -51,6 +52,8 @@ def check_if_token_in_blacklist(jwt_header, jwt_payload):
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    # Enable CORS for all routes and origins
+    CORS(app)
 
     # Initialize extensions
     db.init_app(app)

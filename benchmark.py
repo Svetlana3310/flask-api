@@ -149,7 +149,7 @@ def save_results_to_file(results, filename="benchmark_results.txt"):
 
 
 def run_benchmark():
-    batch_sizes = [1000, 10000, 100000]
+    batch_sizes = [1000]
     results = []
 
     for batch_size in batch_sizes:
